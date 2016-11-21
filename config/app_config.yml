@@ -1,1 +1,8 @@
-appName: Dropwizard Sandbox Example
+message: Dropwizard Sandbox Example
+
+# mysql phonebook connection
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: phonebookuser
+  password: phonebookpassword
+  url: jdbc:mysql://localhost/phonebook

@@ -5,6 +5,8 @@ sourceCompatibility = 1.8
 project.ext {
     configPath = "$rootProject.projectDir/config/"
     dropwizardVersion = '1.0.5'
+    mysqlVersion = '5.1.22'
+    dropwizardJdbiVersion = '0.7.0-rc1'
 }
 
 repositories {
@@ -12,7 +14,9 @@ repositories {
 }
 
 dependencies {
-    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-jdbi',        version: dropwizardJdbiVersion
+    compile group: 'mysql',         name: 'mysql-connector-java',   version: mysqlVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-core',        version: dropwizardVersion
 }
 
 mainClassName = "com.sandbox.dropwizard.MyApplication"

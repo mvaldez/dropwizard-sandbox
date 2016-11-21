@@ -1,6 +1,8 @@
 package com.sandbox.resources;
 
+import com.sandbox.dao.ContactDAO;
 import com.sandbox.representations.Contact;
+import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,24 +17,31 @@ import javax.ws.rs.core.Response;
 
 @Path("/contact")
 @Produces(MediaType.APPLICATION_JSON)
-public class ExampleResource {
+public class ContactResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final ContactDAO contactDao;
+
+    public ContactResource(DBI jdbi) {
+        contactDao = jdbi.onDemand(ContactDAO.class);
+    }
 
     @GET
     @Path("/{id}")
     public Response getContact(@PathParam("id") int id) {
 
-        // TODO: query for contact
+        // retrieve information about the contact with the provided id
+        Contact contact = contactDao.getContactById(id);
 
-        return Response.ok(new Contact( id, "John", "Doe", "+123456789"))
+        logger.info("Successfully retrieved contact with id " + id + ". Contact: " + contact);
+
+        return Response.ok(contact)
                 .build();
     }
 
     @POST
-    public Response createContact(
-            @FormParam("name") String name,
-            @FormParam("phone") String phone) {
+    public Response createContact(Contact contact) {
 
         // TODO: store contact
 
@@ -51,14 +60,14 @@ public class ExampleResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateContact(@PathParam("id") int id,
-                                  @FormParam("firstName") String firstName,
-                                  @FormParam("lastName") String lastName,
-                                  @FormParam("phone") String phone) {
+    public Response updateContact(@PathParam("id") int id, Contact contact) {
 
         // TODO: update contact given id
 
-        return Response.ok(new Contact(id, firstName, lastName, phone))
+        return Response.ok(new Contact(id,
+                contact.getFirstName(),
+                contact.getLastName(),
+                contact.getPhone()))
                 .build();
     }
 }
