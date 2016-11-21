@@ -6,16 +6,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AppConfiguration extends Configuration {
 
-   @NotEmpty
-   private String appName;
+    @NotEmpty
+    private String appName;
 
-   @JsonProperty
-   public String getAppName() {
-      return appName;
-   }
+    @JsonProperty
+    public String getAppName() {
+        return appName;
+    }
 
-   @JsonProperty
-   public void setAppName(final String appName) {
-      this.appName = appName;
-   }
+    @JsonProperty
+    public void setAppName(final String appName) {
+        this.appName = appName;
+    }
 }
