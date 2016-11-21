@@ -1,5 +1,6 @@
-package com.sandbox.dropwizard;
+package com.sandbox.resources;
 
+import com.sandbox.representations.Contact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class ExampleResource {
 
         // TODO: query for contact
 
-        return Response.ok("{contact_id: " + id + ", name: \"Dummy Name\",phone: \"+0123456789\" }")
+        return Response.ok(new Contact( id, "John", "Doe", "+123456789"))
                 .build();
     }
 
@@ -51,12 +52,13 @@ public class ExampleResource {
     @PUT
     @Path("/{id}")
     public Response updateContact(@PathParam("id") int id,
-                                  @FormParam("name") String name,
+                                  @FormParam("firstName") String firstName,
+                                  @FormParam("lastName") String lastName,
                                   @FormParam("phone") String phone) {
 
         // TODO: update contact given id
 
-        return Response.ok("{contact_id: "+ id +", name: \""+ name +"\",phone: \""+ phone +"\" }")
+        return Response.ok(new Contact(id, firstName, lastName, phone))
                 .build();
     }
 }

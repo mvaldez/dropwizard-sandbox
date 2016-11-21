@@ -1,5 +1,6 @@
 package com.sandbox.dropwizard;
 
+import com.sandbox.resources.ExampleResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
