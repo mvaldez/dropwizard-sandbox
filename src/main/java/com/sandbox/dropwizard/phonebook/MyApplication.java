@@ -1,10 +1,13 @@
 package com.sandbox.dropwizard.phonebook;
 
+import com.google.common.cache.CacheBuilderSpec;
 import com.sandbox.dropwizard.phonebook.resources.ClientResource;
 import com.sandbox.dropwizard.phonebook.resources.ContactResource;
 import com.sun.jersey.api.client.Client;
 import io.dropwizard.Application;
+import io.dropwizard.auth.CachingAuthenticator;
 import io.dropwizard.auth.basic.BasicAuthProvider;
+import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
@@ -39,9 +42,13 @@ public class MyApplication extends Application<PhonebookConfiguration> {
         final Client client = new JerseyClientBuilder(environment).build("REST Client");
         environment.jersey().register(new ClientResource(client));
 
+        CachingAuthenticator<BasicCredentials, Boolean> authenticator =
+                new CachingAuthenticator<BasicCredentials, Boolean>(environment.metrics(),
+                        new PhonebookAuthenticator(jdbi),
+                        CacheBuilderSpec.parse("maximumSize=10000, expireAfterAccess=10m"));
+
         // register the authenticator with the environment
         environment.jersey().register(new BasicAuthProvider<Boolean>(
-                new PhonebookAuthenticator(jdbi), "Web Service Realm"));
-//        client.addFilter(new HTTPBasicAuthFilter("john_doe", "secret"));
+                authenticator, "Web Service Realm"));
     }
 }
