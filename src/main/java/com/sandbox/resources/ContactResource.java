@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  *
@@ -41,20 +43,18 @@ public class ContactResource {
     }
 
     @POST
-    public Response createContact(Contact contact) {
-
-        // TODO: store contact
-
-        return Response.created(null)
-                .build();
+    public Response createContact(Contact contact) throws URISyntaxException {
+        // store the new contact
+        int newContactId = contactDao.createContact(contact.getFirstName(), contact.getLastName(), contact.getPhone());
+        return Response.created(new URI(String.valueOf(newContactId))).build();
     }
 
     @DELETE
     @Path("/{id}")
     public Response deleteContact(@PathParam("id") int id) {
 
-        // TODO: delete contact for the id argument
-
+        // delete the contact with the provided id
+        contactDao.deleteContact(id);
         return Response.noContent().build();
     }
 
@@ -62,12 +62,8 @@ public class ContactResource {
     @Path("/{id}")
     public Response updateContact(@PathParam("id") int id, Contact contact) {
 
-        // TODO: update contact given id
-
-        return Response.ok(new Contact(id,
-                contact.getFirstName(),
-                contact.getLastName(),
-                contact.getPhone()))
-                .build();
+        // update the contact with the provided ID
+        contactDao.updateContact(id, contact.getFirstName(), contact.getLastName(), contact.getPhone());
+        return Response.ok(new Contact(id, contact.getFirstName(), contact.getLastName(), contact.getPhone())).build();
     }
 }
