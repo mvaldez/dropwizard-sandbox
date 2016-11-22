@@ -1,4 +1,4 @@
-package com.sandbox.dropwizard;
+package com.sandbox.dropwizard.phonebook;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

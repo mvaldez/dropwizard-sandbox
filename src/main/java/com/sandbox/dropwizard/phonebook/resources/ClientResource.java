@@ -1,6 +1,6 @@
-package com.sandbox.resources;
+package com.sandbox.dropwizard.phonebook.resources;
 
-import com.sandbox.representations.Contact;
+import com.sandbox.dropwizard.phonebook.representations.Contact;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;

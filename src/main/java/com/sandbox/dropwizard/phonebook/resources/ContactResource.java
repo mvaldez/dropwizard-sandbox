@@ -1,7 +1,7 @@
-package com.sandbox.resources;
+package com.sandbox.dropwizard.phonebook.resources;
 
-import com.sandbox.dao.ContactDAO;
-import com.sandbox.representations.Contact;
+import com.sandbox.dropwizard.phonebook.dao.ContactDAO;
+import com.sandbox.dropwizard.phonebook.representations.Contact;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

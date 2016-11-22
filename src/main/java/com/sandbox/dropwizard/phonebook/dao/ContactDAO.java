@@ -1,7 +1,7 @@
-package com.sandbox.dao;
+package com.sandbox.dropwizard.phonebook.dao;
 
-import com.sandbox.dao.mappers.ContactMapper;
-import com.sandbox.representations.Contact;
+import com.sandbox.dropwizard.phonebook.dao.mappers.ContactMapper;
+import com.sandbox.dropwizard.phonebook.representations.Contact;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;

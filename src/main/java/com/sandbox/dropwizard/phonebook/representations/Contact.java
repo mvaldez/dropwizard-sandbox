@@ -1,4 +1,4 @@
-package com.sandbox.representations;
+package com.sandbox.dropwizard.phonebook.representations;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;

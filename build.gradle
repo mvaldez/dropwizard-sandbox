@@ -11,6 +11,7 @@ project.ext {
     dropwizardJdbiVersion = '0.7.0'
     dropwizardClientVersion = '0.7.0'
     jerseyClientVersion = '1.8'
+    dropwizardAuthVersion = '0.7.0'
 }
 
 repositories {
@@ -18,14 +19,14 @@ repositories {
 }
 
 dependencies {
-    //compile group: 'com.sun.jersey',    name: 'jersey-client',          version: jerseyClientVersion
+    compile group: 'io.dropwizard',     name: 'dropwizard-auth',        version: dropwizardAuthVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-client',      version: dropwizardClientVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-jdbi',        version: dropwizardJdbiVersion
     compile group: 'mysql',             name: 'mysql-connector-java',   version: mysqlVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-core',        version: dropwizardVersion
 }
 
-mainClassName = "com.sandbox.dropwizard.MyApplication"
+mainClassName = "com.sandbox.dropwizard.phonebook.MyApplication"
 
 run {
     args 'server', configPath + 'app_config.yml'

@@ -1,6 +1,6 @@
-package com.sandbox.dao.mappers;
+package com.sandbox.dropwizard.phonebook.dao.mappers;
 
-import com.sandbox.representations.Contact;
+import com.sandbox.dropwizard.phonebook.representations.Contact;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 

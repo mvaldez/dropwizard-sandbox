@@ -1,7 +1,7 @@
-package com.sandbox.dropwizard;
+package com.sandbox.dropwizard.phonebook;
 
-import com.sandbox.resources.ClientResource;
-import com.sandbox.resources.ContactResource;
+import com.sandbox.dropwizard.phonebook.resources.ClientResource;
+import com.sandbox.dropwizard.phonebook.resources.ContactResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.dropwizard.Application;
