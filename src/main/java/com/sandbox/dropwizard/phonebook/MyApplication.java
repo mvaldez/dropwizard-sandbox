@@ -3,7 +3,6 @@ package com.sandbox.dropwizard.phonebook;
 import com.sandbox.dropwizard.phonebook.resources.ClientResource;
 import com.sandbox.dropwizard.phonebook.resources.ContactResource;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import io.dropwizard.Application;
 import io.dropwizard.auth.basic.BasicAuthProvider;
 import io.dropwizard.client.JerseyClientBuilder;
@@ -42,7 +41,7 @@ public class MyApplication extends Application<PhonebookConfiguration> {
 
         // register the authenticator with the environment
         environment.jersey().register(new BasicAuthProvider<Boolean>(
-                new PhonebookAuthenticator(), "Web Service Realm"));
-        client.addFilter(new HTTPBasicAuthFilter("john_doe", "secret"));
+                new PhonebookAuthenticator(jdbi), "Web Service Realm"));
+//        client.addFilter(new HTTPBasicAuthFilter("john_doe", "secret"));
     }
 }

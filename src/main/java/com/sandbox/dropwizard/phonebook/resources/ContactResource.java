@@ -38,7 +38,7 @@ public class ContactResource {
 
     @GET
     @Path("/{id}")
-    public Response getContact(@PathParam("id") int id, @Auth(required = false) Boolean isAuthenticated) {
+    public Response getContact(@PathParam("id") int id, @Auth(required = true) Boolean isAuthenticated) {
 
         // retrieve information about the contact with the provided id
         Contact contact = contactDao.getContactById(id);
