@@ -2,6 +2,7 @@ package com.sandbox.dropwizard.phonebook.resources;
 
 import com.sandbox.dropwizard.phonebook.dao.ContactDAO;
 import com.sandbox.dropwizard.phonebook.representations.Contact;
+import io.dropwizard.auth.Auth;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class ContactResource {
 
     @GET
     @Path("/{id}")
-    public Response getContact(@PathParam("id") int id) {
+    public Response getContact(@PathParam("id") int id, @Auth(required = false) Boolean isAuthenticated) {
 
         // retrieve information about the contact with the provided id
         Contact contact = contactDao.getContactById(id);
@@ -49,7 +50,7 @@ public class ContactResource {
     }
 
     @POST
-    public Response createContact(Contact contact) throws URISyntaxException {
+    public Response createContact(Contact contact, @Auth Boolean isAuthenticated) throws URISyntaxException {
         // Validate the contact's data
         Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
         // Are there any constraint violations?
@@ -74,7 +75,7 @@ public class ContactResource {
 
     @DELETE
     @Path("/{id}")
-    public Response deleteContact(@PathParam("id") int id) {
+    public Response deleteContact(@PathParam("id") int id, @Auth Boolean isAuthenticated) {
 
         // delete the contact with the provided id
         contactDao.deleteContact(id);
@@ -83,7 +84,7 @@ public class ContactResource {
 
     @PUT
     @Path("/{id}")
-    public Response updateContact(@PathParam("id") int id, Contact contact) {
+    public Response updateContact(@PathParam("id") int id, Contact contact, @Auth Boolean isAuthenticated) {
 
         Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
         if (violations.size() > 0) {
