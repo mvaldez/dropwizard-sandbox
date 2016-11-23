@@ -19,7 +19,7 @@ import java.util.Set;
 
 /**
  *
- * @author {@link "mark.valdez@gmail.com"}
+ * @author {@link "markvaldez@gmail.com"}
  */
 
 @Path("/contact")
@@ -38,7 +38,7 @@ public class ContactResource {
 
     @GET
     @Path("/{id}")
-    public Response getContact(@PathParam("id") int id, @Auth(required = true) Boolean isAuthenticated) {
+    public Response getContact(@PathParam("id") int id, @Auth( required = false) Boolean isAuthenticated) {
 
         // retrieve information about the contact with the provided id
         Contact contact = contactDao.getContactById(id);
@@ -53,6 +53,7 @@ public class ContactResource {
     public Response createContact(Contact contact, @Auth Boolean isAuthenticated) throws URISyntaxException {
         // Validate the contact's data
         Set<ConstraintViolation<Contact>> violations = validator.validate(contact);
+
         // Are there any constraint violations?
         if (violations.size() > 0) {
             // Validation errors occurred
@@ -60,9 +61,10 @@ public class ContactResource {
             for (ConstraintViolation<Contact> violation : violations) {
                 validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
             }
-            return Response.status(Response.Status.BAD_REQUEST)
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
                     .entity(validationMessages).build();
-        } else {      // OK, no validation errors
+        } else { // OK, no validation errors
             // Store the new contact
             int newContactId = contactDao.createContact(contact.getFirstName(),
                     contact.getLastName(), contact.getPhone());

@@ -10,8 +10,9 @@ project.ext {
     mysqlVersion = '5.1.22'
     dropwizardJdbiVersion = '0.7.0'
     dropwizardClientVersion = '0.7.0'
-    jerseyClientVersion = '1.8'
     dropwizardAuthVersion = '0.7.0'
+    dropwizardAssetsVersion = '0.7.0'
+    dropwizardMustacheVersion = '0.7.0'
 }
 
 repositories {
@@ -19,6 +20,8 @@ repositories {
 }
 
 dependencies {
+    compile group: 'io.dropwizard',     name: 'dropwizard-views-mustache', version: dropwizardMustacheVersion
+    compile group: 'io.dropwizard',     name: 'dropwizard-assets',      version: dropwizardAssetsVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-auth',        version: dropwizardAuthVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-client',      version: dropwizardClientVersion
     compile group: 'io.dropwizard',     name: 'dropwizard-jdbi',        version: dropwizardJdbiVersion

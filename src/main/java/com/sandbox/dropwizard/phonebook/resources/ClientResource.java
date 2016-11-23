@@ -1,6 +1,7 @@
 package com.sandbox.dropwizard.phonebook.resources;
 
 import com.sandbox.dropwizard.phonebook.representations.Contact;
+import com.sandbox.dropwizard.phonebook.views.ContactView;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.Response;
  *
  * @author {@link "markvaldez@gmail.com"}
  */
-@Produces(MediaType.TEXT_PLAIN)
+@Produces(MediaType.TEXT_HTML)
 @Path("/client/")
 public class ClientResource {
 
@@ -28,12 +29,10 @@ public class ClientResource {
 
     @GET
     @Path("showContact")
-    public String showContact(@QueryParam("id") int id) {
+    public ContactView showContact(@QueryParam("id") int id) {
         WebResource contactResource = client.resource("http://localhost:8080/contact/" + id);
         Contact c = contactResource.get(Contact.class);
-        String output = "ID: " + id + "\nFirst name: " + c.getFirstName() +
-                "\nLast name: " + c.getLastName() + "\nPhone: " + c.getPhone();
-        return output;
+        return new ContactView(c);
     }
 
     @GET
