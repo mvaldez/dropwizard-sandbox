@@ -1,5 +1,6 @@
 package com.sandbox.dropwizard.phonebook;
 
+import com.sandbox.dropwizard.phonebook.health.NewContactHealthCheck;
 import com.sandbox.dropwizard.phonebook.resources.ClientResource;
 import com.sandbox.dropwizard.phonebook.resources.ContactResource;
 import com.sun.jersey.api.client.Client;
@@ -47,5 +48,9 @@ public class MyApplication extends Application<PhonebookConfiguration> {
         environment.jersey().register(new BasicAuthProvider<>(
                 new PhonebookAuthenticator(jdbi), "Web Service Realm"));
 //        client.addFilter(new HTTPBasicAuthFilter("john_doe", "secret"));
+        
+        // add health checks
+        environment.healthChecks().register("New Contact health check",
+                                            new NewContactHealthCheck(client));
     }
 }
