@@ -19,6 +19,19 @@ Book uses Maven but this project uses Gradle
 # database
 Examples use MySQL database.  Create database schema and tables with the following command
 
+Start mysql client and create database
+```
+create database phonebook;
+```
+
+Create users
+```
+create user 'phonebookuser'@localhost' identified by 'phonebookpassword';
+grant all on phonebook.* to 'phonebookuser'@'localhost';
+use 'phonebook'
+```
+
+Import tables
 ```
 mysql -u username -p phonebook < database/mysql/phonebook-import.sql
 ```
